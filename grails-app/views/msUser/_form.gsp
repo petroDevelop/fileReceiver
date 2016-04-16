@@ -26,11 +26,11 @@
 	<g:textField name="rigName" maxlength="100" value="${msUserInstance?.rigName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: msUserInstance, field: 'role', 'error')} required">
-	<label for="role">
-		<g:message code="msUser.role.label" default="Role" />
+<div class="fieldcontain ${hasErrors(bean: msUserInstance, field: 'msRole', 'error')} required">
+	<label for="msRole">
+		<g:message code="msUser.msRole.label" default="Ms Role" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="role" name="role.id" from="${com.petrodata.microseism.MsRole.list()}" optionKey="id" required="" value="${msUserInstance?.role?.id}" class="many-to-one"/>
+	<g:select id="msRole" name="msRole.id" from="${com.petrodata.microseism.MsRole.list()}" optionKey="id" required="" value="${msUserInstance?.msRole?.id}" class="many-to-one"/>
 </div>
 

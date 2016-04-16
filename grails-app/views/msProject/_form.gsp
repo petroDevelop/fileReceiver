@@ -18,12 +18,12 @@
 	<g:textField name="rigName" maxlength="100" value="${msProjectInstance?.rigName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'creator', 'error')} required">
-	<label for="creator">
-		<g:message code="msProject.creator.label" default="Creator" />
+<div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'msUser', 'error')} required">
+	<label for="msUser">
+		<g:message code="msProject.msUser.label" default="Ms User" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="creator" name="creator.id" from="${com.petrodata.microseism.MsUser.list()}" optionKey="id" required="" value="${msProjectInstance?.creator?.id}" class="many-to-one"/>
+	<g:select id="msUser" name="msUser.id" from="${com.petrodata.microseism.MsUser.list()}" optionKey="id" required="" value="${msProjectInstance?.msUser?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'remark', 'error')} ">

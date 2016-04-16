@@ -32,9 +32,9 @@
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'msSmallFile.dateCreated.label', default: 'Date Created')}" />
 					
-						<th><g:message code="msSmallFile.file.label" default="File" /></th>
-					
 						<g:sortableColumn property="lastUpdated" title="${message(code: 'msSmallFile.lastUpdated.label', default: 'Last Updated')}" />
+					
+						<th><g:message code="msSmallFile.msFile.label" default="Ms File" /></th>
 					
 					</tr>
 				</thead>
@@ -50,9 +50,9 @@
 					
 						<td><g:formatDate date="${msSmallFileInstance.dateCreated}" /></td>
 					
-						<td>${fieldValue(bean: msSmallFileInstance, field: "file")}</td>
-					
 						<td><g:formatDate date="${msSmallFileInstance.lastUpdated}" /></td>
+					
+						<td>${fieldValue(bean: msSmallFileInstance, field: "msFile")}</td>
 					
 					</tr>
 				</g:each>

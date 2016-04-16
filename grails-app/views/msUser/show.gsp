@@ -50,11 +50,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${msUserInstance?.role}">
+				<g:if test="${msUserInstance?.msRole}">
 				<li class="fieldcontain">
-					<span id="role-label" class="property-label"><g:message code="msUser.role.label" default="Role" /></span>
+					<span id="msRole-label" class="property-label"><g:message code="msUser.msRole.label" default="Ms Role" /></span>
 					
-						<span class="property-value" aria-labelledby="role-label"><g:link controller="msRole" action="show" id="${msUserInstance?.role?.id}">${msUserInstance?.role?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="msRole-label"><g:link controller="msRole" action="show" id="${msUserInstance?.msRole?.id}">${msUserInstance?.msRole?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

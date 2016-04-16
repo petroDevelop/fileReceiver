@@ -63,8 +63,8 @@ class MsRoleController {
         if (version != null) {
             if (msRoleInstance.version > version) {
                 msRoleInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'msRole.label', default: 'MsRole')] as Object[],
-                        "Another user has updated this MsRole while you were editing")
+                          [message(code: 'msRole.label', default: 'MsRole')] as Object[],
+                          "Another user has updated this MsRole while you were editing")
                 render(view: "edit", model: [msRoleInstance: msRoleInstance])
                 return
             }

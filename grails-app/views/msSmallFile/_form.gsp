@@ -26,11 +26,11 @@
 	<g:checkBox name="uploaded" value="${msSmallFileInstance?.uploaded}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: msSmallFileInstance, field: 'file', 'error')} required">
-	<label for="file">
-		<g:message code="msSmallFile.file.label" default="File" />
+<div class="fieldcontain ${hasErrors(bean: msSmallFileInstance, field: 'msFile', 'error')} required">
+	<label for="msFile">
+		<g:message code="msSmallFile.msFile.label" default="Ms File" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="file" name="file.id" from="${com.petrodata.microseism.MsFile.list()}" optionKey="id" required="" value="${msSmallFileInstance?.file?.id}" class="many-to-one"/>
+	<g:select id="msFile" name="msFile.id" from="${com.petrodata.microseism.MsFile.list()}" optionKey="id" required="" value="${msSmallFileInstance?.msFile?.id}" class="many-to-one"/>
 </div>
 

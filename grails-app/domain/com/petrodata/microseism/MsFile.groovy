@@ -11,7 +11,7 @@ class MsFile {
     int smallFileNum
     //上传总进度
     int percent    // 0--100
-    MsProject project
+    MsProject msProject
     Date dateCreated
     Date lastUpdated
 
@@ -22,6 +22,9 @@ class MsFile {
         percent()
     }
 
-    static belongsTo = [project: MsProject]
+    static belongsTo = [msProject: MsProject]
     static hasMany = [files : MsSmallFile]
+    String toString(){
+        return fileName
+    }
 }

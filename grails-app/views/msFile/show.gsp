@@ -88,11 +88,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${msFileInstance?.project}">
+				<g:if test="${msFileInstance?.msProject}">
 				<li class="fieldcontain">
-					<span id="project-label" class="property-label"><g:message code="msFile.project.label" default="Project" /></span>
+					<span id="msProject-label" class="property-label"><g:message code="msFile.msProject.label" default="Ms Project" /></span>
 					
-						<span class="property-value" aria-labelledby="project-label"><g:link controller="msProject" action="show" id="${msFileInstance?.project?.id}">${msFileInstance?.project?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="msProject-label"><g:link controller="msProject" action="show" id="${msFileInstance?.msProject?.id}">${msFileInstance?.msProject?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

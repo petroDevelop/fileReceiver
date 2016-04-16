@@ -8,6 +8,7 @@ class MsSmallFile {
     //文件大小，以字节个数记录
     Long fileSize
     //上传成功与否标志
+    MsFile msFile
     Boolean uploaded = false
     Date dateCreated
     Date lastUpdated
@@ -18,5 +19,8 @@ class MsSmallFile {
         uploaded(nullable: false)
     }
 
-    static belongsTo = [file : MsFile]
+    static belongsTo = [msFile : MsFile]
+    String toString(){
+        return fileName
+    }
 }

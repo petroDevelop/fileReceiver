@@ -51,11 +51,11 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: msFileInstance, field: 'project', 'error')} required">
-	<label for="project">
-		<g:message code="msFile.project.label" default="Project" />
+<div class="fieldcontain ${hasErrors(bean: msFileInstance, field: 'msProject', 'error')} required">
+	<label for="msProject">
+		<g:message code="msFile.msProject.label" default="Ms Project" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="project" name="project.id" from="${com.petrodata.microseism.MsProject.list()}" optionKey="id" required="" value="${msFileInstance?.project?.id}" class="many-to-one"/>
+	<g:select id="msProject" name="msProject.id" from="${com.petrodata.microseism.MsProject.list()}" optionKey="id" required="" value="${msFileInstance?.msProject?.id}" class="many-to-one"/>
 </div>
 

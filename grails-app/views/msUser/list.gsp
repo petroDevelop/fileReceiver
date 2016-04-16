@@ -30,7 +30,7 @@
 					
 						<g:sortableColumn property="rigName" title="${message(code: 'msUser.rigName.label', default: 'Rig Name')}" />
 					
-						<th><g:message code="msUser.role.label" default="Role" /></th>
+						<th><g:message code="msUser.msRole.label" default="Ms Role" /></th>
 					
 					</tr>
 				</thead>
@@ -44,7 +44,7 @@
 					
 						<td>${fieldValue(bean: msUserInstance, field: "rigName")}</td>
 					
-						<td>${fieldValue(bean: msUserInstance, field: "role")}</td>
+						<td>${fieldValue(bean: msUserInstance, field: "msRole")}</td>
 					
 					</tr>
 				</g:each>

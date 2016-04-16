@@ -7,7 +7,7 @@ class MsProject {
     //所在井队名称
     String rigName
     //创建者，就是登录的用户
-    MsUser creator
+    MsUser msUser
     String remark
     Date dateCreated
     Date lastUpdated
@@ -15,9 +15,13 @@ class MsProject {
     static constraints = {
         projectName(size: 0..200, nullable: false)
         rigName(size: 0..100, nullable: true)
-        creator(nullable: false)
+        msUser(nullable: false)
         remark(size: 0..1000, nullable: true)
     }
 
     static hasMany = [files : MsFile]
+
+    String toString(){
+        return projectName
+    }
 }

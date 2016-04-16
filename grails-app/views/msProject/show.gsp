@@ -41,11 +41,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${msProjectInstance?.creator}">
+				<g:if test="${msProjectInstance?.msUser}">
 				<li class="fieldcontain">
-					<span id="creator-label" class="property-label"><g:message code="msProject.creator.label" default="Creator" /></span>
+					<span id="msUser-label" class="property-label"><g:message code="msProject.msUser.label" default="Ms User" /></span>
 					
-						<span class="property-value" aria-labelledby="creator-label"><g:link controller="msUser" action="show" id="${msProjectInstance?.creator?.id}">${msProjectInstance?.creator?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="msUser-label"><g:link controller="msUser" action="show" id="${msProjectInstance?.msUser?.id}">${msProjectInstance?.msUser?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

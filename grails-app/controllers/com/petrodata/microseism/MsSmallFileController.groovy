@@ -63,8 +63,8 @@ class MsSmallFileController {
         if (version != null) {
             if (msSmallFileInstance.version > version) {
                 msSmallFileInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'msSmallFile.label', default: 'MsSmallFile')] as Object[],
-                        "Another user has updated this MsSmallFile while you were editing")
+                          [message(code: 'msSmallFile.label', default: 'MsSmallFile')] as Object[],
+                          "Another user has updated this MsSmallFile while you were editing")
                 render(view: "edit", model: [msSmallFileInstance: msSmallFileInstance])
                 return
             }

@@ -21,6 +21,7 @@ class MsUserController {
 
     def save() {
         def msUserInstance = new MsUser(params)
+        msUserInstance.msRole=MsRole.get(params['msRole.id']);
         if (!msUserInstance.save(flush: true)) {
             render(view: "create", model: [msUserInstance: msUserInstance])
             return
@@ -63,8 +64,8 @@ class MsUserController {
         if (version != null) {
             if (msUserInstance.version > version) {
                 msUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'msUser.label', default: 'MsUser')] as Object[],
-                        "Another user has updated this MsUser while you were editing")
+                          [message(code: 'msUser.label', default: 'MsUser')] as Object[],
+                          "Another user has updated this MsUser while you were editing")
                 render(view: "edit", model: [msUserInstance: msUserInstance])
                 return
             }

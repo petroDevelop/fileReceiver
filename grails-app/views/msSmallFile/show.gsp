@@ -59,20 +59,20 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${msSmallFileInstance?.file}">
-				<li class="fieldcontain">
-					<span id="file-label" class="property-label"><g:message code="msSmallFile.file.label" default="File" /></span>
-					
-						<span class="property-value" aria-labelledby="file-label"><g:link controller="msFile" action="show" id="${msSmallFileInstance?.file?.id}">${msSmallFileInstance?.file?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${msSmallFileInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="msSmallFile.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${msSmallFileInstance?.lastUpdated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${msSmallFileInstance?.msFile}">
+				<li class="fieldcontain">
+					<span id="msFile-label" class="property-label"><g:message code="msSmallFile.msFile.label" default="Ms File" /></span>
+					
+						<span class="property-value" aria-labelledby="msFile-label"><g:link controller="msFile" action="show" id="${msSmallFileInstance?.msFile?.id}">${msSmallFileInstance?.msFile?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

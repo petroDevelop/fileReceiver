@@ -63,7 +63,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.8"
 
-        compile ':cache:1.1.1'
+        //compile ':cache:1.1.1'
 
         runtime ":activemq:0.4.1"
     }

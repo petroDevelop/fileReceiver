@@ -28,7 +28,7 @@
 					
 						<g:sortableColumn property="rigName" title="${message(code: 'msProject.rigName.label', default: 'Rig Name')}" />
 					
-						<th><g:message code="msProject.creator.label" default="Creator" /></th>
+						<th><g:message code="msProject.msUser.label" default="Ms User" /></th>
 					
 						<g:sortableColumn property="remark" title="${message(code: 'msProject.remark.label', default: 'Remark')}" />
 					
@@ -46,7 +46,7 @@
 					
 						<td>${fieldValue(bean: msProjectInstance, field: "rigName")}</td>
 					
-						<td>${fieldValue(bean: msProjectInstance, field: "creator")}</td>
+						<td>${fieldValue(bean: msProjectInstance, field: "msUser")}</td>
 					
 						<td>${fieldValue(bean: msProjectInstance, field: "remark")}</td>
 					

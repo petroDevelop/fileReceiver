@@ -63,8 +63,8 @@ class MsProjectController {
         if (version != null) {
             if (msProjectInstance.version > version) {
                 msProjectInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'msProject.label', default: 'MsProject')] as Object[],
-                        "Another user has updated this MsProject while you were editing")
+                          [message(code: 'msProject.label', default: 'MsProject')] as Object[],
+                          "Another user has updated this MsProject while you were editing")
                 render(view: "edit", model: [msProjectInstance: msProjectInstance])
                 return
             }
