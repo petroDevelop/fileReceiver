@@ -13,6 +13,8 @@ class LoginController {
         if(user.userPwd==params.password){
             map.result=true;
             map.id=user.id;
+            map.name=user.userName;
+            map.username=user.userName;
         }else{
             map.result=false;
         }
