@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class MicroseismController {
 
-    def beforeInterceptor = [action: this.&auth, except: 'login']
+   // def beforeInterceptor = [action: this.&auth, except: 'login']
 
     private auth() {
         if (!session.user) {
@@ -75,5 +75,20 @@ class MicroseismController {
           2、将已完成上传的微地震数据放在一个结果集里
         */
 
+    }
+
+    def catchProjects(){
+        def list=[]
+        if(params.id){
+            def projects=MsProject.findAllByMsUser(MsUser.get(params.id));
+            projects.each{project->
+                def map=[:]
+                map.id=project.id;
+                map.name=project.projectName;
+                map.rigName=project.rigName;
+                list<<map;
+            }
+        }
+        render list as JSON;
     }
 }
