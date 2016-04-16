@@ -1,0 +1,12 @@
+04-16 11:20:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "MS_FILE" not found; SQL statement:
+alter table ms_file drop constraint FK4FAF3875DAC6B828 [42102-164]
+04-16 11:20:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "MS_PROJECT" not found; SQL statement:
+alter table ms_project drop constraint FK1822F98011E15F8B [42102-164]
+04-16 11:20:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "MS_SMALL_FILE" not found; SQL statement:
+alter table ms_small_file drop constraint FK8CBF89ED8CAD31EC [42102-164]
+04-16 11:20:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "MS_USER" not found; SQL statement:
+alter table ms_user drop constraint FK4FB62EC411BA97AC [42102-164]
