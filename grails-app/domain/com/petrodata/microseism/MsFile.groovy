@@ -8,10 +8,17 @@ class MsFile {
     //文件大小，以字节个数记录
     long fileSize
     //拆分成多少个小文件
-    int smallFileNum
+    int smallFileNum=1;
     //上传总进度
-    int percent    // 0--100
+    transient int percent    // 0--100
+    //上传成功与否标志
+    boolean uploaded = false
     MsProject msProject
+    //客户端path
+    String clientPath
+    String md5
+    //服务器合并后path
+    String serverPath
     Date dateCreated
     Date lastUpdated
 
@@ -20,11 +27,19 @@ class MsFile {
         fileSize()
         smallFileNum()
         percent()
+        uploaded()
+        clientPath(size: 0..500,nullable: true)
+        md5(size: 0..500,nullable: true)
+        serverPath(size: 0..500,nullable: true)
     }
 
     static belongsTo = [msProject: MsProject]
-    static hasMany = [files : MsSmallFile]
+    //static hasMany = [files : MsSmallFile]
     String toString(){
         return fileName
+    }
+    int getPercent(){
+        def count=MsSmallFile.countByMsFileAndUploaded(this,true);
+        return (count/smallFileNum).intValue();
     }
 }
