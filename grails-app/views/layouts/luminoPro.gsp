@@ -1,8 +1,8 @@
-<%@ page import="com.petrodata.pms.core.BaseUser" %>
+<%@ page   %>
 <!DOCTYPE html>
 <html>
 <head>
-    <g:set var="currentUser" value="${com.petrodata.pms.core.BaseUser.findByUsername(sec.username())}"/>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title><g:layoutTitle/></title>
@@ -33,58 +33,6 @@
                     alert('抱歉,本系统的最佳浏览效果不支持IE9之前的浏览器版本');
                 }
             }
-            //init message online
-            //这里使用sse协议
-            var grailsEvents = new grails.Events('${request.contextPath}/', {transport: 'sse'});
-            //grailsEvents.close()
-            function sendMessage(){
-                //grailsEvents.send('toServer', {msg: "msg from browser"}); //will send data to server topic 'saveTodo'
-            }
-
-            //接受服务器发送的消息
-            grailsEvents.on('fromServer', function(data){
-                playAudio('alert');
-                $('.informer-warning').html(Number($('.informer-warning').html())+1);
-                $('.label-warning').find('p').html(Number($('.label-warning').find('p').html())+1);
-                var firstObj=$('#noteListDiv').find('.list-group-item').first();
-                var obj=firstObj.clone();
-                obj.find('strong').html(data.title);
-                obj.find('span').html(data.content);
-                obj.find('.text-muted').html(data.date+' /');
-                obj.insertBefore(firstObj);
-            });
-            grailsEvents.on('chat-${currentUser?.id}', function(data){
-                playAudio('alert');
-                //if dialog is open
-                var showObj=$('#messageBody');
-                if(showObj && showObj.length!=0 && $('#messageModal').hasClass('in')){
-                    var img = $('.list-group-contacts').find("img[alt='"+data.senderUsername+"']");
-                    img.parent().find('span').html(Number(img.parent().find('span').html())+1);
-                    var one=showObj.find('.item').first();
-                    var oneclone=one.clone();
-                    oneclone.removeClass('in');
-                    oneclone.find('a').html(data.sender);
-                    oneclone.find('span').html(data.date);
-                    oneclone.find('p').html(data.content);
-                    oneclone.css('display','block');
-                    showObj.append(oneclone);
-                    showObj[0].scrollTop=showObj[0].scrollHeight;
-                }else{
-                    $('.dropdown-toggle .label-danger').html(Number($('.dropdown-toggle .label-danger').html())+1);
-                    var firstObj=$('#dropdownMessage').find('li').first();
-                    var obj=firstObj.clone();
-                    obj.find('.pull-right').html(data.sender);
-                    obj.find('.messageContent').html(data.content.substr(0,12)+"...");
-                    obj.find('a').attr('data-sender',data.senderUsername);
-                    obj.find('.text-muted').html(data.date);
-                    obj.insertBefore(firstObj);
-                    $('<li class="divider"></li>').insertBefore(firstObj);
-                }
-            });
-            $(window).on('beforeunload', function(){
-                grailsEvents.close();
-            });
-
         });
         function playAudio(file){
             if(file === 'alert')
@@ -232,7 +180,7 @@
 
 </head>
 
-<body class="${currentUser.skin?:'skin-1'}">
+<body class="skin-1">
 
 <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 1000px">
@@ -272,61 +220,10 @@
             <img src="${request.contextPath}/images/line.png"  style="height: 25px;border: 0px"/>
             </a>
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown"><a>欢迎 ：<sec:username/></a></li>
+                <li class="dropdown"><a>欢迎 ： </a></li>
                 <!-- message -->
-                <g:set var="messages" value="${com.petrodata.pms.Message.findAllByIsreadAndReceiver(false,currentUser,['sort':'id','order':'desc'])}" />
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="glyphicon glyphicon-envelope"></i>  <span class="label label-danger">${messages.size()}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages" id="dropdownMessage">
-                        <g:each in="${messages}" var="message" status="i">
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="#" onclick="showMessageDialog(this)" data-sender="${message.sender}" class="pull-left">
-                                        <img alt="image" class="img-circle" src="${request.contextPath}/images/fff.png">
-                                    </a>
-                                    <div class="message-body">
-                                        <small class="pull-right">${message.sender}</small>
-                                        <a href="#" onclick="showMessageDialog(this)" data-sender="${message.sender}" class="messageContent">
-                                            ${message.content?.size()<12?message.content:(message.content[0..11]+'...')}
-                                        </a>
-                                        <br />
-                                        <small class="text-muted">${message.dateCreated?.format('yyyy-MM-dd HH:mm')}</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                        </g:each>
-                        <g:if test="${messages.size()==0}">
-                            <li style="">
-                                <div class="dropdown-messages-box">
-                                    <a href="#" onclick="showMessageDialog(this)" data-sender="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="${request.contextPath}/images/fff.png">
-                                    </a>
-                                    <div class="message-body">
-                                        <small class="pull-right"></small>
-                                        <a href="#" onclick="showMessageDialog(this)" data-sender=""  class="messageContent"></a>
-                                        <br />
-                                        <small class="text-muted"></small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                        </g:if>
+                <g:set var="messages" value="0" />
 
-
-
-                        <li>
-                            <div class="all-button">
-                                <a href="#"  onclick="showMessageDialog(this)" data-sender="">
-                                    <em class="glyphicon glyphicon-inbox"></em> <strong>全部消息</strong>
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-                </li>
 
                 <!-- end message -->
                 <!-- warning -->
@@ -362,24 +259,10 @@
         </div>
     </form>
     <ul class="nav menu">
-<sec:ifNotGranted roles="ROLE_MEMBER">
+
         <li ><a href="${request.contextPath}/"><span class="glyphicon glyphicon-dashboard"></span> 首页</a></li>
- </sec:ifNotGranted>
-         <sec:ifAnyGranted roles="ROLE_ADMIN">
-             <g:render template="/layouts/menu/admin"/>
-         </sec:ifAnyGranted>
-         <sec:ifAnyGranted roles="ROLE_MANAGER">
-             <g:render template="/layouts/menu/manager"/>
-         </sec:ifAnyGranted>
-         <sec:ifAnyGranted roles="ROLE_PROJECT">
-             <g:render template="/layouts/menu/project"/>
-         </sec:ifAnyGranted>
-         <sec:ifAnyGranted roles="ROLE_CAPTAIN">
-             <g:render template="/layouts/menu/captain"/>
-         </sec:ifAnyGranted>
-         <sec:ifAnyGranted roles="ROLE_MEMBER">
-             <g:render template="/layouts/menu/member"/>
-         </sec:ifAnyGranted>
+        <g:render template="/layouts/menu/admin"/>
+
         <li role="presentation" class="divider"></li>
         <li><a href="${request.contextPath}/logout"><span class="glyphicon glyphicon-user"></span> 退出</a></li>
     </ul>

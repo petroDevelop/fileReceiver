@@ -89,3 +89,6 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+grails.plugins.activemq.port=61616;
+grails.plugins.activemq.useJmx=false;
+grails.plugins.activemq.persistent=true;

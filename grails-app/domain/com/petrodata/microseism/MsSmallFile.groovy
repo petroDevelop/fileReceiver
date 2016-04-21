@@ -7,7 +7,7 @@ class MsSmallFile {
     String fileName
     //文件大小，以字节个数记录
     long fileSize
-    //切分顺序
+    //切分顺序 (从0开始)
     int splitNum
     MsFile msFile
     //客户端path

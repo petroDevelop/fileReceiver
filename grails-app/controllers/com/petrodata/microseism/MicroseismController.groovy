@@ -207,4 +207,30 @@ class MicroseismController {
         }
         render map as JSON;
     }
+    def catchFileStat(){
+        //todo 获取文件的操作情况
+        def msFile=MsFile.get(params.id);
+        def smallFileIds=MsSmallFile.createCriteria().list{
+            projections {
+                distinct('splitNum')
+            }
+            eq('msFile',msFile)
+            eq('uploaded',true)
+        }
+        def map=[:]
+        map.id=msFile?.id;
+        map.name=msFile?.fileName;
+        map.size=msFile?.fileSize;
+        //name,projectId,path,size,splitStartNum,splitEndNum,md5
+        map.projectId=msFile?.msProject?.id;
+        map.path=msFile?.clientPath;
+        map.splitStartNum=0;
+        map.splitEndNum=(msFile?.smallFileNum?:1-1);
+        map.md5=msFile?.md5;
+        map.uploaded=msFile?.uploaded;
+        map.percent=(smallFileIds.size()/(msFile?.smallFileNum?:1))*100.intValue();
+        map.finishBlockIds=smallFileIds;
+        map.continueBlockIds=((map.splitStartNum..map.splitEndNum)-smallFileIds).unique();
+        render map as JSON;
+    }
 }

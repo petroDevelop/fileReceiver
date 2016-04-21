@@ -3,52 +3,69 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="luminoPro">
 		<g:set var="entityName" value="${message(code: 'msRole.label', default: 'MsRole')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+
 	</head>
 	<body>
-		<a href="#show-msRole" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a  href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active" ><g:link  action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+			<li class="active" ><g:link  action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+		</ol>
+	</div><!--/.row-->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<g:message code="default.show.label" args="[entityName]" />
+					<g:if test="${flash.message}">
+						<div class="message" role="status">${flash.message}</div>
+					</g:if>
+				</div>
+				<div class="panel-body">
+					<table class="table tile">
+						
+
+						<tr><th>	<span id="roleName-label" class="property-label"><g:message code="msRole.roleName.label" default="Role Name" /></span></th>
+							<td>
+								<span class="property-value" aria-labelledby="roleName-label"><g:fieldValue bean="${msRoleInstance}" field="roleName"/></span>
+								</td>
+
+						</tr>
+
+						
+
+						<tr><th>	<span id="remark-label" class="property-label"><g:message code="msRole.remark.label" default="Remark" /></span></th>
+							<td>
+								<span class="property-value" aria-labelledby="remark-label"><g:fieldValue bean="${msRoleInstance}" field="remark"/></span>
+								</td>
+
+						</tr>
+
+						   </table>
+					<g:form url="[resource:msRoleInstance, action:'delete']" method="DELETE">
+						<fieldset class="buttons">
+							<g:hiddenField name="id" value="${msRoleInstance?.id}" />
+							<g:link class="btn btn-default margin" action="edit"  id="${msRoleInstance?.id}" resource="${msRoleInstance}">
+								<span class="glyphicon glyphicon-edit"></span>
+								<g:message code="default.button.edit.label" default="Edit" /></g:link>
+							<button type="submit" name="_action_delete"
+									class="btn btn-default margin"
+									onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >
+								<span class="glyphicon glyphicon-trash"></span>${message(code: 'default.button.delete.label', default: 'Delete')}</button>
+
+						</fieldset>
+					</g:form>
+				</div>
+			</div>
 		</div>
-		<div id="show-msRole" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list msRole">
-			
-				<g:if test="${msRoleInstance?.roleName}">
-				<li class="fieldcontain">
-					<span id="roleName-label" class="property-label"><g:message code="msRole.roleName.label" default="Role Name" /></span>
-					
-						<span class="property-value" aria-labelledby="roleName-label"><g:fieldValue bean="${msRoleInstance}" field="roleName"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${msRoleInstance?.remark}">
-				<li class="fieldcontain">
-					<span id="remark-label" class="property-label"><g:message code="msRole.remark.label" default="Remark" /></span>
-					
-						<span class="property-value" aria-labelledby="remark-label"><g:fieldValue bean="${msRoleInstance}" field="remark"/></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${msRoleInstance?.id}" />
-					<g:link class="edit" action="edit" id="${msRoleInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
-		</div>
+	</div><!--/.row-->
+
+
+
 	</body>
 </html>
