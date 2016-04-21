@@ -2,12 +2,13 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'projectName', 'error')} ">
+
+<div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'projectName', 'error')} required">
 	<label for="projectName">
 		<g:message code="msProject.projectName.label" default="Project Name" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="projectName" maxlength="200" value="${msProjectInstance?.projectName}"/>
+	<g:textField class="form-control input-sm m-b-10"  name="projectName" maxlength="200" required="" value="${msProjectInstance?.projectName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'rigName', 'error')} ">
@@ -15,7 +16,7 @@
 		<g:message code="msProject.rigName.label" default="Rig Name" />
 		
 	</label>
-	<g:textField name="rigName" maxlength="100" value="${msProjectInstance?.rigName}"/>
+	<g:textField class="form-control input-sm m-b-10"  name="rigName" maxlength="100" value="${msProjectInstance?.rigName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'msUser', 'error')} required">
@@ -23,7 +24,7 @@
 		<g:message code="msProject.msUser.label" default="Ms User" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="msUser" name="msUser.id" from="${com.petrodata.microseism.MsUser.list()}" optionKey="id" required="" value="${msProjectInstance?.msUser?.id}" class="many-to-one"/>
+	<g:select id="msUser" name="msUser.id" from="${com.petrodata.microseism.MsUser.list()}" optionKey="id" required="" value="${msProjectInstance?.msUser?.id}" class="form-control input-lg m-b-10"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'remark', 'error')} ">
@@ -31,7 +32,7 @@
 		<g:message code="msProject.remark.label" default="Remark" />
 		
 	</label>
-	<g:textArea name="remark" cols="40" rows="5" maxlength="1000" value="${msProjectInstance?.remark}"/>
+	<g:textArea name="remark" class="form-control overflow"  cols="40" rows="5" maxlength="1000" value="${msProjectInstance?.remark}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: msProjectInstance, field: 'files', 'error')} ">
@@ -51,3 +52,17 @@
 
 </div>
 
+
+
+<script>
+	$('.form_date').datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
+</script>
