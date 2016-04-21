@@ -20,4 +20,7 @@ class LoginController {
         }
         render map as JSON;
     }
+    def auth(){
+
+    }
 }

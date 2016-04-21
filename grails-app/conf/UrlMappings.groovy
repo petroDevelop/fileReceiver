@@ -7,7 +7,10 @@ class UrlMappings {
 			}
 		}
 
-		"/"(view:"/index")
+		name blankUri:"/" {
+			controller="workspace"
+			action="index"
+		}
 		"500"(view:'/error')
 	}
 }

@@ -3,7 +3,11 @@ package com.petrodata.microseism
 import grails.converters.JSON
 
 class MicroseismController {
-
+    def index(){
+        def message = "Hi, this is a Hello World with JMS & ActiveMQ, " + new Date()
+        sendJMSMessage("queue.notification", message)
+        render 'over'
+    }
    // def beforeInterceptor = [action: this.&auth, except: 'login']
 
 /*    private auth() {

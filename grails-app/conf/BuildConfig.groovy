@@ -66,5 +66,6 @@ grails.project.dependency.resolution = {
         //compile ':cache:1.1.1'
 
         runtime ":activemq:0.4.1"
+        runtime ":jms:1.3"
     }
 }
