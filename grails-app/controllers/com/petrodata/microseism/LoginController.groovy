@@ -21,6 +21,17 @@ class LoginController {
         render map as JSON;
     }
     def auth(){
+        println params
+        if(params.username){
+            def user=MsUser.findByUserName(params.username);
+            println user.id
+            println user.userPwd
+            if(user.userPwd==params.password){
+                session.user=params.username
+                redirect(controller: "workspace",action: "index")
+            }else{
 
+            }
+        }
     }
 }

@@ -216,11 +216,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><!--<span>生产设备</span>管理系统-->
-            <img src="${request.contextPath}/images/line.png"  style="height: 25px;border: 0px"/>
+            <a class="navbar-brand" href="#"><!---->
+                <span>文件传输</span>管理系统
             </a>
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown"><a>欢迎 ： </a></li>
+                <li class="dropdown"><a>欢迎:${session.user} </a></li>
                 <!-- message -->
                 <g:set var="messages" value="0" />
 
