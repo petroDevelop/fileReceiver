@@ -97,6 +97,7 @@ class MicroseismController {
     }
     //增加一条文件记录()
     def addOneFile(){
+        //println params
         //params（name,projectId,path,size,splitStartNum,splitEndNum,md5）
         def map=[:]
         def msProject=MsProject.get(params.projectId);
@@ -123,9 +124,20 @@ class MicroseismController {
         render map as JSON;
     }
     def finishOneFile(){
-        //params（fileId）
+        println params
+        //def msFile=MsFile.get(params.fileId);
+        //def map=combineOneFile(msFile);
+        def obj=[:]
+        obj.taskType="finishOneFile";
+        obj.fileId=params.fileId;
+        obj.realpath=request.servletContext.getRealPath("/WEB-INF")
+        sendQueueJMSMessage("queue.notification",obj)
         def map=[:]
-        def msFile=MsFile.get(params.fileId);
+        map.result=true;
+        render map as JSON;
+    }
+    private combineOneFile(MsFile msFile){
+        def map=[:]
         if(msFile){
             def count=MsSmallFile.countByMsFileAndUploaded(msFile,true);
             if(count==msFile.smallFileNum){
@@ -164,18 +176,37 @@ class MicroseismController {
             map.error=300;
             map.message="没有此文件";
         }
+        return map;
+    }
+    def uploadOneBlockByQueue(){
+        println params
+        def obj=[:]
+        obj.taskType="uploadOneBlock";
+        obj.name=params.name.decodeURL();
+        obj.fileId=params.fileId;
+        obj.splitNum=params.splitNum;
+        obj.size=params.size;
+        obj.path=params.path?.decodeURL();
+        obj.splitStartNum=0;
+        obj.md5=params.md5;
+        obj.block=request.getFile("uploadFile").bytes;
+        obj.realpath=request.servletContext.getRealPath("/WEB-INF")
+        sendQueueJMSMessage("queue.notification",obj)
+        def map=[:]
+        map.result=true;
         render map as JSON;
     }
     def uploadOneBlock(){
+        //println params
         //params（name,fileId,splitNum,path,size,splitStartNum,splitEndNum,md5，uploadFile（二进制文件））
         def msFile=MsFile.get(params.fileId);
         def map=[:]
         if(msFile){
-            def smallFile=MsSmallFile.findByMsFileAndFileName(msFile,params.name);
+            def smallFile=MsSmallFile.findByMsFileAndFileName(msFile,params.name.decodeURL());
             if(!smallFile){
-                smallFile=new MsSmallFile(fileName: params.name,fileSize: params.size.toLong(),splitNum:params.splitNum.toInteger());
+                smallFile=new MsSmallFile(fileName: params.name.decodeURL(),fileSize: params.size.toLong(),splitNum:params.splitNum.toInteger());
                 smallFile.msFile=msFile;
-                smallFile.clientPath=params.path;
+                smallFile.clientPath=params.path?.decodeURL();
                 smallFile.md5=params.md5;
                 smallFile.save(flush: true);
             }
@@ -189,9 +220,15 @@ class MicroseismController {
                 def uploadFile=request.getFile("uploadFile");
                 uploadFile.transferTo(file);
                 smallFile.serverPath=file.path;
+                println params.splitNum+"="+file.length()+"======"+smallFile.fileSize
                 if(file.length()==smallFile.fileSize){
                     if(file.bytes.encodeAsMD5()==smallFile.md5){
                         smallFile.uploaded=true;
+                        map.result=true;
+                        //判断是否文件都已传完并合并
+                        if(MsSmallFile.countByMsFileAndUploaded(msFile,true)==msFile.smallFileNum){
+                            combineOneFile(msFile)
+                        }
                     }else{
                         map.result=false;
                         map.error=900;

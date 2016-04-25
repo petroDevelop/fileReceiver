@@ -167,11 +167,11 @@
 								   data-url="${request.contextPath}/msSmallFile/json"   data-cache="false"
 								   data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true"
 								   data-side-pagination="server" data-pagination="true" data-query-params="queryParams"
-								   data-select-item-name="checkIds" data-sort-name="name" data-sort-order="desc">
+								   data-select-item-name="checkIds" data-sort-name="fileName" data-sort-order="desc">
 								<thead>
 								<tr>
 									<th data-field="nofield" data-checkbox="true"></th>
-									<th data-field="id"  data-sortable="true" ></th>
+									<th data-field="id"  data-sortable="true" >id</th>
 									
 									<th data-field="fileName"  data-sortable="true"   >${message(code: 'msSmallFile.fileName.label', default: 'File Name')}</th>
 									

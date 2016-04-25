@@ -39,6 +39,7 @@ class MsFile {
         return fileName
     }
     int getPercent(){
+        if(!id ||this.id<=0){return 0}
         def count=MsSmallFile.countByMsFileAndUploaded(this,true);
         return (count/smallFileNum).intValue();
     }
