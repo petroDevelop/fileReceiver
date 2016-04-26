@@ -9,6 +9,7 @@ class OnNotificationService {
     static destination = "queue.notification"
 
     def onMessage(obj){
+        println obj.fileId
         if(obj.taskType=='finishOneFile'){
             combineOneFile(MsFile.get(obj.fileId),obj.realpath);
         }
@@ -47,7 +48,7 @@ class OnNotificationService {
                             smallFile.save(flush: true);
                             //判断是否文件都已传完并合并
                             if(MsSmallFile.countByMsFileAndUploaded(msFile,true)==msFile.smallFileNum){
-                                 combineOneFile(msFile,obj.realpath)
+                                 //combineOneFile(msFile,obj.realpath)
                             }
                         }else{
                             map.result=false;
@@ -112,7 +113,7 @@ class OnNotificationService {
             map.error=300;
             map.message="没有此文件";
         }
-        println map;
+        //println map;
         //return map;
     }
 }

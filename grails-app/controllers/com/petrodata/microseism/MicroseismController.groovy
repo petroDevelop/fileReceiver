@@ -84,7 +84,7 @@ class MicroseismController {
     def catchProjects(){
         def list=[]
         if(params.id){
-            def projects=MsProject.findAllByMsUser(MsUser.get(params.id));
+            def projects=MsProject.findAllByMsUser(MsUser.read(params.id));
             projects.each{project->
                 def map=[:]
                 map.id=project.id;
@@ -100,7 +100,7 @@ class MicroseismController {
         //println params
         //params（name,projectId,path,size,splitStartNum,splitEndNum,md5）
         def map=[:]
-        def msProject=MsProject.get(params.projectId);
+        def msProject=MsProject.read(params.projectId);
         def num=MsFile.countByMsProjectAndFileName(msProject,params.name);
         if(num>0){
             map.result=false;
@@ -125,13 +125,14 @@ class MicroseismController {
     }
     def finishOneFile(){
         println params
-        //def msFile=MsFile.get(params.fileId);
-        //def map=combineOneFile(msFile);
+
         def obj=[:]
         obj.taskType="finishOneFile";
         obj.fileId=params.fileId;
         obj.realpath=request.servletContext.getRealPath("/WEB-INF")
         sendQueueJMSMessage("queue.notification",obj)
+        //def msFile=MsFile.read(params.fileId);
+        //def map=combineOneFile(msFile);
         def map=[:]
         map.result=true;
         render map as JSON;
@@ -199,7 +200,7 @@ class MicroseismController {
     def uploadOneBlock(){
         //println params
         //params（name,fileId,splitNum,path,size,splitStartNum,splitEndNum,md5，uploadFile（二进制文件））
-        def msFile=MsFile.get(params.fileId);
+        def msFile=MsFile.read(params.fileId);
         def map=[:]
         if(msFile){
             def smallFile=MsSmallFile.findByMsFileAndFileName(msFile,params.name.decodeURL());
@@ -250,7 +251,7 @@ class MicroseismController {
     }
     def catchFileStat(){
         //todo 获取文件的操作情况
-        def msFile=MsFile.get(params.id);
+        def msFile=MsFile.read(params.id);
         def smallFileIds=MsSmallFile.createCriteria().list{
             projections {
                 distinct('splitNum')
