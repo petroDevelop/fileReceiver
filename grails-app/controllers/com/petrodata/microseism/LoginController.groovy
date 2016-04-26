@@ -26,8 +26,8 @@ class LoginController {
         }
         if(params.username){
             def user=MsUser.findByUserName(params.username);
-            println user.id
-            println user.userPwd
+            //println user.id
+            //println user.userPwd
             if(user.userPwd==params.password){
                 session.user=params.username
                 redirect(controller: "workspace",action: "index")

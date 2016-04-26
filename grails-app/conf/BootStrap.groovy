@@ -1,10 +1,12 @@
 import com.petrodata.microseism.MsProject
 import com.petrodata.microseism.MsRole
 import com.petrodata.microseism.MsUser
-
+import grails.converters.JSON
+import com.petrodata.converters.marshaller.json.TableDomainClassMarshaller
 class BootStrap {
 
     def init = { servletContext ->
+        JSON.registerObjectMarshaller(new TableDomainClassMarshaller(true, true, 10));
         if(MsRole.count()==0){
             ['ROLE_ADMIN','ROLE_USER'].each{
                 new MsRole(roleName:it,remark: it).save(flush: true);
