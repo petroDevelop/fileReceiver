@@ -146,11 +146,6 @@
 						</div>
 						<div class="panel-body">
 							<div  id="toolbar">
-								<button class="btn btn-default margin" data-toggle="modal"
-										data-target="#myModal" type="button"> <!--$('#myModal').modal('show');-->
-									<span class="glyphicon glyphicon-new-window"></span>
-									<g:message code="default.import.label" args="[entityName]" />
-								</button>
 
 								<button class="btn btn-default margin " onclick="newWindow()" type="button" >
 									<span class="glyphicon glyphicon-plus"></span>

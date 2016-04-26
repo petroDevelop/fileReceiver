@@ -123,9 +123,9 @@ class MicroseismController {
         }
         render map as JSON;
     }
-    def finishOneFile(){
+/*    def finishOneFile(){
         println params
-
+        return;
         def obj=[:]
         obj.taskType="finishOneFile";
         obj.fileId=params.fileId;
@@ -136,7 +136,7 @@ class MicroseismController {
         def map=[:]
         map.result=true;
         render map as JSON;
-    }
+    }*/
     private combineOneFile(MsFile msFile){
         def map=[:]
         if(msFile){
@@ -180,7 +180,7 @@ class MicroseismController {
         return map;
     }
     def uploadOneBlockByQueue(){
-        println params
+        //println params
         def obj=[:]
         obj.taskType="uploadOneBlock";
         obj.name=params.name.decodeURL();
@@ -221,7 +221,7 @@ class MicroseismController {
                 def uploadFile=request.getFile("uploadFile");
                 uploadFile.transferTo(file);
                 smallFile.serverPath=file.path;
-                println params.splitNum+"="+file.length()+"======"+smallFile.fileSize
+                //println params.splitNum+"="+file.length()+"======"+smallFile.fileSize
                 if(file.length()==smallFile.fileSize){
                     if(file.bytes.encodeAsMD5()==smallFile.md5){
                         smallFile.uploaded=true;

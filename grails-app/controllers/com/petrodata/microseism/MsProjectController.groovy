@@ -8,7 +8,14 @@ import grails.converters.JSON
 class MsProjectController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE","GET","POST"]]
+    def beforeInterceptor = [action: this.&auth, except: 'login']
 
+    private auth() {
+        if (!session.user) {
+            redirect(controller: 'login',action: 'auth')
+            return false
+        }
+    }
     def index() {
         redirect(action: "list", params: params)
     }

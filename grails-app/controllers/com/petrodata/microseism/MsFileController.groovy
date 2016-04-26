@@ -8,7 +8,14 @@ import grails.converters.JSON
 class MsFileController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE","GET","POST"]]
+    def beforeInterceptor = [action: this.&auth, except: 'login']
 
+    private auth() {
+        if (!session.user) {
+            redirect(controller: 'login',action: 'auth')
+            return false
+        }
+    }
     def index() {
         redirect(action: "list", params: params)
     }
@@ -119,6 +126,7 @@ class MsFileController {
         }
 
         try {
+            MsSmallFile.executeUpdate 'DELETE FROM MsSmallFile WHERE msFile=:msFile', [msFile: msFileInstance]
             msFileInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'msFile.label', default: 'MsFile'), id])
             redirect(action: "list")
@@ -132,9 +140,8 @@ class MsFileController {
         def map=[:]
         def list=params.ids.tokenize(',');
         list.each{
-            
-                def oneInstance=MsFile.get(it.toLong());
-            
+            def oneInstance=MsFile.get(it.toLong());
+            MsSmallFile.executeUpdate 'DELETE FROM MsSmallFile WHERE msFile=:msFile', [msFile: oneInstance]
             oneInstance.delete(flush:true);
         }
         flash.message = message(code: 'default.deleted.message', args: [message(code: 'msFile.label', default: 'MsFile'), params.ids])
