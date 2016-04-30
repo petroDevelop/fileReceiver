@@ -4,8 +4,8 @@ import grails.converters.JSON
 
 class MicroseismController {
     def index(){
-        def message = "Hi, this is a Hello World with JMS & ActiveMQ, " + new Date()
-        sendJMSMessage("queue.notification", message)
+/*        def message = "Hi, this is a Hello World with JMS & ActiveMQ, " + new Date()
+        sendJMSMessage("queue.notification", message)*/
         render 'over'
     }
    // def beforeInterceptor = [action: this.&auth, except: 'login']
@@ -181,20 +181,32 @@ class MicroseismController {
     }
     def uploadOneBlockByQueue(){
         //println params
-        def obj=[:]
-        obj.taskType="uploadOneBlock";
-        obj.name=params.name.decodeURL();
-        obj.fileId=params.fileId;
-        obj.splitNum=params.splitNum;
-        obj.size=params.size;
-        obj.path=params.path?.decodeURL();
-        obj.splitStartNum=0;
-        obj.md5=params.md5;
-        obj.block=request.getFile("uploadFile").bytes;
-        obj.realpath=request.servletContext.getRealPath("/WEB-INF")
-        sendQueueJMSMessage("queue.notification",obj)
         def map=[:]
-        map.result=true;
+        try{
+            def properties=new Properties()
+            def inStream=MicroseismController.class.getResourceAsStream("/config.properties")
+            properties.load(inStream.newReader('utf8'))
+            def realPath=request.servletContext.getRealPath("/WEB-INF");
+            if((new File(realPath)).exists()){
+                realPath=properties.getProperty("fileSaveDirectory");
+            }
+            def obj=[:]
+            obj.taskType="uploadOneBlock";
+            obj.name=params.name.decodeURL();
+            obj.fileId=params.fileId;
+            obj.splitNum=params.splitNum;
+            obj.size=params.size;
+            obj.path=params.path?.decodeURL();
+            obj.splitStartNum=0;
+            obj.md5=params.md5;
+            obj.block=request.getFile("uploadFile").bytes;
+            obj.realpath=realPath;  //
+            sendQueueJMSMessage("queue.notification",obj)
+            map.result=true;
+        }catch (e){
+            map.result=false;
+            map.message=e.message
+        }
         render map as JSON;
     }
     def uploadOneBlock(){

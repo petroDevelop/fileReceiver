@@ -180,7 +180,7 @@
 
 </head>
 
-<body class="skin-1">
+<body class="${session.skin?:'skin-1'}">
 
 <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 1000px">

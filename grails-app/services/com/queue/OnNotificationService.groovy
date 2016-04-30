@@ -93,7 +93,11 @@ class OnNotificationService {
                 msFile.save(flush: true);
                 file.withOutputStream {outputStream->
                     MsSmallFile.findAllByMsFileAndUploaded(msFile,true,['sort':'splitNum','order':'asc']).each{smallFile->
-                        outputStream.write(new File(smallFile.serverPath).bytes);
+                        def oneSmallFile=new File(smallFile.serverPath);
+                        if(oneSmallFile.exists()){
+                            outputStream.write(oneSmallFile.bytes);
+                            oneSmallFile.delete();
+                        }
                     }
                 }
                 if(file.length()==msFile.fileSize){
