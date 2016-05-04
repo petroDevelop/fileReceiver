@@ -217,7 +217,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><!---->
-                <span>文件传输</span>管理系统
+                <span>微地震</span>数据传输管理系统
             </a>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown"><a>欢迎:${session.user} </a></li>

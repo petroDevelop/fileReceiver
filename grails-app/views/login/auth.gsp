@@ -40,17 +40,17 @@
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
-                文件传输系统
+                微地震数据传输管理系统
             </div>
             <div class="panel-body">
                 <!-- Login -->
                 <form role="form" id="box-login" action='${request.contextPath}/login/auth' method='POST'  name="loginForm" autocomplete='off'>
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" class="form-control"  autofocus=""  name="username" placeholder="用户名">
+                            <input type="text" class="form-control"  autofocus="" id="username" name="username" placeholder="用户名">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control"   name="password" placeholder="密码">
+                            <input type="password" class="form-control"  id="password" name="password" placeholder="密码">
                         </div>
 
                         <div class="checkbox">
@@ -59,6 +59,7 @@
                             </label>
                         </div>
                         <input type="submit" value="登录" class="btn btn-primary" />
+                        <input type="button" onclick="$('#username').val('');$('#password').val('');" value="取消" class="btn btn-primary" />
                         <small>
                             <!--
                             <a class="box-switcher" data-switch="box-register" href="">注册</a> or
@@ -104,7 +105,7 @@
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
-                文件传输系统
+                微地震数据传输管理系统
             </div>
             <div class="panel-body">
                 <!-- Forgot Password -->

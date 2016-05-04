@@ -100,7 +100,7 @@ class MicroseismController {
         //println params
         //params（name,projectId,path,size,splitStartNum,splitEndNum,md5）
         def map=[:]
-        def msProject=MsProject.read(params.projectId);
+        def msProject=MsProject.read(params.projectId?.toLong());
         def num=MsFile.countByMsProjectAndFileName(msProject,params.name);
         if(num>0){
             map.result=false;

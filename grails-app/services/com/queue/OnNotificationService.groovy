@@ -24,7 +24,7 @@ class OnNotificationService {
     private processBlockFile(obj){
         try{
             if(obj.fileId){
-                def msFile=MsFile.get(obj.fileId);
+                def msFile=MsFile.get(obj.fileId?.toLong());
                 def map=[:]
                 if(msFile){
                     def smallFile=MsSmallFile.findByMsFileAndFileName(msFile,obj.name.decodeURL());
