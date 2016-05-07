@@ -39,7 +39,7 @@
 <div class="row box tile animated active" >
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading" style="font-size:24px">
                 微地震数据传输管理系统
             </div>
             <div class="panel-body">
@@ -58,14 +58,22 @@
                                 <!-- <input name="remember" type="checkbox" value="Remember Me">Remember Me  -->
                             </label>
                         </div>
-                        <input type="submit" value="登录" class="btn btn-primary" />
-                        <input type="button" onclick="$('#username').val('');$('#password').val('');" value="取消" class="btn btn-primary" />
-                        <small>
-                            <!--
+                    </fieldset>
+                    <fieldset >
+
+                        <input type="submit" value="登录" class="btn btn-primary col-xs-5 " />
+
+                        <input type="button" onclick="$('#username').val('');$('#password').val('');" value="取消" class="btn btn-primary col-xs-5 col-xs-offset-1" />
+
+                        <!--
+                            <small>
+
                             <a class="box-switcher" data-switch="box-register" href="">注册</a> or
                             <a class="box-switcher" data-switch="box-reset" href="">忘记密码?</a>
-                            -->
+
                         </small>
+                         -->
+
                     </fieldset>
                 </form>
 

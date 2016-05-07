@@ -216,7 +216,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><!---->
+            <a class="navbar-brand" href="#" style="font-size: 26px"><!---->
                 <span>微地震</span>数据传输管理系统
             </a>
             <ul class="nav navbar-top-links navbar-right">
